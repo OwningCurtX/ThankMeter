@@ -10,6 +10,15 @@ Developer/s: Curt
 Copyright Year: 2013-2016
 
 
+### ToDo List
+
+* In game statistics to be implimented to the thank meter page & thank meter signature .
+* Multi-Language Feature.
+* User Control Panel needs to be updated due to new features added to the thank meter.
+* Removing request thank meter page and make a registration page via User Control Panel Page.
+* Users can edit their thank meter signature (This includes: their signature designs/X and Y meter position/X and Y online feature position/X and Y player statustics position).
+* Fix Bugs.
+
 
 ## Changes
 
@@ -28,3 +37,4 @@ Copyright Year: 2013-2016
 * Added User Description functions and database structure. 
 * Added twitter and facebook functions and database structure.
 * Added comments enable/disable functions.
+
