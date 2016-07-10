@@ -61,6 +61,15 @@ if (isDBOffline("connection") == true) {
 			$motd = $getArray["motd"]; //Get User's MOTD
 			$replace1 = $getArray["replace1"]; //Get User's Replacement for "You Thanked me!"
 			$replace2 = $getArray["replace2"]; //Get User's Replacement for "You already thanked me!"
+			$profilerole = $getArray["profilerole"]; //Profile Role
+			$profilepic = $getArray["profilepic"]; //Profile Picture URL
+			$profiledescription = $getArray["profiledescription"]; //Profile description
+			$twitter = $getArray["twitterlink"]; //Twitter Link
+			$facebook = $getArray["facebooklink"]; //Facebook Link
+			$background1 = $getArray["background1"]; //background1 Link
+			$background2 = $getArray["background2"]; //background2 Link
+			$background3 = $getArray["background3"]; //background3 Link
+			$background4 = $getArray["background4"]; //background4 Link
 			if ($disablecom == "true") {
 				$commentsection = false;
 			} else {
@@ -149,9 +158,9 @@ if (isDBOffline("connection") == true) {
 						</tr>".$commentfinaloutput;
 					  */
 					  $commentfinaloutput = '<li class="cmmnt">
-						<div class="avatar"><a href="javascript:void(0);"><img src="images/pikabob.png" width="55" height="55" alt="photo avatar"></a></div>
+						<div class="avatar"><a href="javascript:void(0);"><img src="/_include/img/profile/default.png" width="55" height="55" alt="photo avatar"></a></div>
 						<div class="cmmnt-content">
-							<header><a href="javascript:void(0);" class="userlink">'.$namec.'</a> - <span class="pubdate">'.$timec.'</span></header>
+							<header><a href="javascript:void(0);" class="userlink">'.$namec.'</a> - <span class="pubdate">'.$timec.'</span> - <a class="button button-mini" href="?u='.$id.'&rc='.$idc.'#contact">Report</a></header>
 							<p>'.$stringc.'</a></p>
 						</div>
 					  </li>'.$commentfinaloutput;
@@ -387,6 +396,7 @@ if (isDBOffline("connection") == true) {
             	<li class="current"><a href="#home-slider">Name</a></li>
                 <li><a href="#about">About Me</a></li>
                 <li><a href="#contact">Comments</a></li>
+				<li><a href="/ucp/index.php">UCP</a></li>
             </ul>
         </nav>
         
@@ -426,19 +436,44 @@ if (isDBOffline("connection") == true) {
         	<div class="image-wrap">
                 <div class="hover-wrap">
                     <span class="overlay-img"></span>
-                    <span class="overlay-text-thumb">Role Profile DB Coming Soon</span>
+                    <span class="overlay-text-thumb"><?php 
+					if ($profilerole != "") {
+						echo $profilerole;
+					} else {
+						echo "I have no role";
+					}
+				?></span>
                 </div>
-                <img src="_include/img/profile/profile-02.jpg" alt="<?php echo $name; ?>">
+				<?php 
+					if ($profilepic != "") {
+						echo '<img src="'.$profilepic.'" alt="'.$name.'">';
+					} else {
+						echo '<img src="_include/img/profile/profile-02.jpg" alt="'.$name.'">';
+					}
+				?>
             </div>
             <h3 class="profile-name"><?php echo $name; ?></h3>
             <p class="profile-description">
-				Description Database will be added soon.
+				<?php 
+					if ($profiledescription != "") {
+						echo $profiledescription;
+					} else {
+						echo "I have no description.";
+					}
+				?>
 			</p>
             	
             <div class="social">
             	<ul class="social-icons">
-                	<li><a href="#"><i class="font-icon-social-twitter"></i></a></li>
-                    <li><a href="#"><i class="font-icon-social-email"></i></a></li>
+				<?php 
+				if ($facebook != "") {
+					echo '<li><a href="'.$facebook.'"><i class="font-icon-social-facebook"></i></a></li>';
+				}
+				
+				if ($twitter != "") {
+					echo '<li><a href="'.$twitter.'"><i class="font-icon-social-twitter"></i></a></li>';
+				}
+				?>
                 </ul>
             </div>
         </div>
@@ -474,18 +509,113 @@ if (isDBOffline("connection") == true) {
     <div class="row">
 
     	<div class="span12">
-        
+		
+			<?php 
+			 if(isset($_POST['submit'])){
+				$namecomad = $_POST['namer'];
+				$msgc = $_POST['message'];
+				if ($namecomad == null || $namecomad == "" || $msgc == "" || $msgc == null || $msgc == "." || $namecomad == ".") {
+				  echo '<div class="alert alert-error fade in">
+                    <a class="close" data-dismiss="alert" href="#">×</a>
+                    <strong>Oh snap!</strong> Please fill your name & your message.
+					</div>';
+				} else {
+					$msgc = strip_tags($msgc);
+					$namecomad = strip_tags($namecomad);
+					$namecomadm = mysqli_real_escape_string(getDbConnection(1), $namecomad);
+					$msgcm = mysqli_real_escape_string(getDbConnection(1), $msgc);
+					$datetime = date("F j, Y h:i A");
+					  if(count($_REQUEST)) {
+						$ggspamstatus = $SpamChk->GetTextStatus();
+						if (strpos($ggspamstatus, "Invalid") !== false ) {
+						  echo '<div class="alert alert-error fade in">
+						<a class="close" data-dismiss="alert" href="#">×</a>
+						<strong>Oh snap!</strong> Our spam checker detects that your message is spam.
+						</div>';
+						} else {
+						  mysqli_query(getDbConnection(1), "INSERT INTO `comment` (`userid`, `time`, `name`, `comment`, `ip`) VALUES ('$idzers', '$datetime', '$namecomadm', '$msgcm', '$ipaddress')");
+						  echo '<div class="alert alert-success fade in">
+						<a class="close" data-dismiss="alert" href="#">×</a>
+						<strong>Success!</strong> Your message is now posted.
+						</div>';
+						  $commentfinaloutput = '<li class="cmmnt">
+								<div class="avatar"><a href="javascript:void(0);"><img src="_include/img/profile/default.png" width="55" height="55" alt="photo avatar"></a></div>
+								<div class="cmmnt-content">
+									<header><a href="javascript:void(0);" class="userlink">'.$namecomad.'</a> - <span class="pubdate">'.$datetime.'</span></header>
+									<p>'.$msgc.'</a></p>
+								</div>
+								</li>'.$commentfinaloutput;
+						}
+					  }
+				}
+			 }
+			 
+			  if (isset($_GET['rc'])) {
+				$rc = $_GET['rc'];
+				$rc = mysqli_real_escape_string(getDbConnection(1), $rc);
+				$getsDB = mysqli_query(getDbConnection(1), "SELECT * FROM comment WHERE (ID='$rc')");
+				if (mysqli_num_rows($getsDB) > 0) {
+				  echo '<div class="alert alert-success fade in">
+						<a class="close" data-dismiss="alert" href="#">×</a>
+						<strong>Success!</strong> Your report has been submited to the Curt Creation Staff Team.
+						</div>';
+				  mysqli_query(getDbConnection(1), "UPDATE comment SET report='true' WHERE ID='$rc'");
+				} else {
+				  echo '<div class="alert alert-error fade in">
+						<a class="close" data-dismiss="alert" href="#">×</a>
+						<strong>Oh snap!</strong> Your report has been not submited due to a database error.
+						</div>';
+				}
+			  }
+			?>
+			
         	<div id="w">
 				<div id="container">
 				  <ul id="comments">
 					
 					<?php 
+					if ($commentsection == false) {
+						$commentfinaloutput = '<li class="cmmnt">
+							<div class="avatar"><a href="javascript:void(0);"><img src="_include/img/profile/system.png" width="55" height="55" alt="photo avatar"></a></div>
+							<div class="cmmnt-content">
+								<header><a href="javascript:void(0);" class="userlink">System</a> - <span class="pubdate">notice</span></header>
+								<p>This user disabled the comments.</a></p>
+							</div>
+							</li>';
+					}
+					
+					if ($commentfinaloutput == "") {
+						$commentfinaloutput = '<li class="cmmnt">
+							<div class="avatar"><a href="javascript:void(0);"><img src="_include/img/profile/system.png" width="55" height="55" alt="photo avatar"></a></div>
+							<div class="cmmnt-content">
+								<header><a href="javascript:void(0);" class="userlink">System</a> - <span class="pubdate">notice</span></header>
+								<p>No comments yet.</a></p>
+							</div>
+							</li>';
+					}
+					
 					echo emojifeature($commentfinaloutput);
 					?>
 					
 				  </ul>
 				</div>
 			  </div>
+			  
+			  <?php if ($commentsection != false) { ?>
+			  
+			  <form id="contact-form" class="contact-form" method="post" action="index.php?u=<?php echo $smallname; ?>#contact">
+            	<p class="contact-name">
+            		<input name="namer" id="name" type="text" placeholder="Your Name" value="" name="name">
+                </p>
+                <p class="contact-email">
+                	<input name="message" id="message" type="text" placeholder="Message" value="">
+                </p>
+                <p class="contact-submit">
+                	<input type="submit" name="submit" value="Post"> </input>
+                </p>
+			  <?php } ?>
+			  
+			  </form>
          
         </div>
        
@@ -502,15 +632,17 @@ if (isDBOffline("connection") == true) {
             <div class="span12">
                 <nav id="social">
                     <ul>
-                        <li><a href="https://twitter.com/Bluxart" title="Follow Me on Twitter" target="_blank"><span class="font-icon-social-twitter"></span></a></li>
-                        <li><a href="http://dribbble.com/Bluxart" title="Follow Me on Dribbble" target="_blank"><span class="font-icon-social-dribbble"></span></a></li>
-                        <li><a href="http://forrst.com/people/Bluxart" title="Follow Me on Forrst" target="_blank"><span class="font-icon-social-forrst"></span></a></li>
-                        <li><a href="http://www.behance.net/alessioatzeni" title="Follow Me on Behance" target="_blank"><span class="font-icon-social-behance"></span></a></li>
-                        <li><a href="https://www.facebook.com/Bluxart" title="Follow Me on Facebook" target="_blank"><span class="font-icon-social-facebook"></span></a></li>
-                        <li><a href="https://plus.google.com/105500420878314068694" title="Follow Me on Google Plus" target="_blank"><span class="font-icon-social-google-plus"></span></a></li>
-                        <li><a href="http://www.linkedin.com/in/alessioatzeni" title="Follow Me on LinkedIn" target="_blank"><span class="font-icon-social-linkedin"></span></a></li>
-                        <li><a href="http://themeforest.net/user/Bluxart" title="Follow Me on ThemeForest" target="_blank"><span class="font-icon-social-envato"></span></a></li>
-                        <li><a href="http://zerply.com/Bluxart/public" title="Follow Me on Zerply" target="_blank"><span class="font-icon-social-zerply"></span></a></li>
+						<?php 
+							if ($facebook != "") {
+								echo '<li><a href="'.$facebook.'" title="Follow Me on Facebook" target="_blank"><span class="font-icon-social-facebook"></span></a></li>';
+							}
+							
+							if ($twitter != "") {
+								echo '<li><a href="'.$twitter.'" title="Follow Me on Twitter" target="_blank"><span class="font-icon-social-twitter"></span></a></li>';
+							}
+						?>
+						
+                        
                     </ul>
                 </nav>
             </div>
@@ -625,10 +757,55 @@ BRUSHED.slider = function(){
 		thumb_links				:	0,			// Individual thumb links for each slide
 		thumbnail_navigation    :   0,			// Thumbnail navigation
 		slides 					:  	[			// Slideshow Images
-											{image : '_include/img/slider-images/image01.jpg', title : '<div class="slide-content"><?php echo $name; ?></div>', thumb : '', url : ''},
-											{image : '_include/img/slider-images/image02.jpg', title : '<div class="slide-content"><?php echo $thankyouecho; ?></div>', thumb : '', url : ''},
-											{image : '_include/img/slider-images/image03.jpg', title : '<div class="slide-content"><?php echo $thanks; ?> Thanks</div>', thumb : '', url : ''},
-											{image : '_include/img/slider-images/image04.jpg', title : '<div class="slide-content">Thank Meter 7.0</div>', thumb : '', url : ''}  
+										<?php 
+											if ($background1 != "") {
+												?>
+												{image : '<?php echo $background1; ?>', title : '<div class="slide-content"><?php echo $name; ?></div>', thumb : '', url : ''},
+												<?php 
+											} else {
+												?>
+												{image : '_include/img/dbackground_1.jpg', title : '<div class="slide-content"><?php echo $name; ?></div>', thumb : '', url : ''},
+												<?php 
+											}
+										?>
+										
+										<?php 
+											if ($background2 != "") {
+												?>
+												{image : '<?php echo $background2; ?>', title : '<div class="slide-content"><?php echo $thankyouecho; ?></div>', thumb : '', url : ''},
+												<?php 
+											} else {
+												?>
+												{image : '_include/img/dbackground_2.jpg', title : '<div class="slide-content"><?php echo $thankyouecho; ?></div>', thumb : '', url : ''},
+												<?php 
+											}
+										?>
+											
+										<?php 
+											if ($background3 != "") {
+												?>
+												{image : '<?php echo $background3; ?>', title : '<div class="slide-content"><?php echo $thanks; ?> Thanks</div>', thumb : '', url : ''},
+												<?php 
+											} else {
+												?>
+												{image : '_include/img/dbackground_3.jpg', title : '<div class="slide-content"><?php echo $thanks; ?> Thanks</div>', thumb : '', url : ''},
+												<?php 
+											}
+										?>	
+										
+										<?php 
+											if ($background4 != "") {
+												?>
+												{image : '<?php echo $background4; ?>', title : '<div class="slide-content">Thank Meter 7.0</div>', thumb : '', url : ''}  
+												<?php 
+											} else {
+												?>
+												{image : '_include/img/dbackground_4.jpg', title : '<div class="slide-content">Thank Meter 7.0</div>', thumb : '', url : ''}  
+												<?php 
+											}
+										?>	
+										
+											
 									],
 									
 		// Theme Options			   

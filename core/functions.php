@@ -192,7 +192,7 @@
 	
 	//Emoji Features
 	function emojifeature ($text) {
-		$text = str_replace(":)", "<img src='/_include/img/emojis/smilely.gif' height='16' wieght='16'>", $text);
+		$text = str_replace(":)", "<img src='/_include/img/emojis/smiley.gif' height='16' wieght='16'>", $text);
 		$text = str_replace(";)", "<img src='/_include/img/emojis/wink.gif' height='16' wieght='16'>", $text);
 		$text = str_replace(":D", "<img src='/_include/img/emojis/cheesy.gif' height='16' wieght='16'>", $text);
 		$text = str_replace(";D", "<img src='/_include/img/emojis/grin.gif' height='16' wieght='16'>", $text);
