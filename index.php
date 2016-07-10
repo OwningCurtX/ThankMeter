@@ -2,12 +2,12 @@
 require ("core/functions.php");
 
 $ipaddress = getIPAddress();
-
+$motd = "";
 if (isDBOffline("connection") == true) {
 	$pagetitle = "Database is offline";
     $id = 0;
     $commentfinaloutput = '<li class="cmmnt">
-	<div class="avatar"><a href="javascript:void(0);"><img src="images/pikabob.png" width="55" height="55" alt="pikabob photo avatar"></a></div>
+	<div class="avatar"><a href="javascript:void(0);"><img src="_include/img/profile/system.png" width="55" height="55" alt="photo avatar"></a></div>
 	<div class="cmmnt-content">
 		<header><a href="javascript:void(0);" class="userlink">System</a> - <span class="pubdate">notice</span></header>
 		<p>Database is currently offline right now, please try again later :(</a></p>
@@ -24,7 +24,7 @@ if (isDBOffline("connection") == true) {
     $pagetitle = "Maintenance";
     $id = 0;
     $commentfinaloutput = '<li class="cmmnt">
-	<div class="avatar"><a href="javascript:void(0);"><img src="images/pikabob.png" width="55" height="55" alt="pikabob photo avatar"></a></div>
+	<div class="avatar"><a href="javascript:void(0);"><img src="_include/img/profile/system.png" width="55" height="55" alt="photo avatar"></a></div>
 	<div class="cmmnt-content">
 		<header><a href="javascript:void(0);" class="userlink">System</a> - <span class="pubdate">notice</span></header>
 		<p>Thank Meter is under Maintenance for '.getMaintenanceReason().'</a></p>
@@ -78,7 +78,7 @@ if (isDBOffline("connection") == true) {
 			  $pagetitle = $name;
 			  $id = $idzers;
 			  $commentfinaloutput = '<li class="cmmnt">
-				<div class="avatar"><a href="javascript:void(0);"><img src="images/pikabob.png" width="55" height="55" alt="pikabob photo avatar"></a></div>
+				<div class="avatar"><a href="javascript:void(0);"><img src="_include/img/profile/system.png" width="55" height="55" alt="photo avatar"></a></div>
 				<div class="cmmnt-content">
 					<header><a href="javascript:void(0);" class="userlink">System</a> - <span class="pubdate">notice</span></header>
 					<p>This account is banned! Viewing/Posting Comments are disabled to this account</a></p>
@@ -94,7 +94,7 @@ if (isDBOffline("connection") == true) {
 			  $pagetitle = "Account doesnt exists";
 			  $id = "0";
 			  $commentfinaloutput = '<li class="cmmnt">
-				<div class="avatar"><a href="javascript:void(0);"><img src="images/pikabob.png" width="55" height="55" alt="pikabob photo avatar"></a></div>
+				<div class="avatar"><a href="javascript:void(0);"><img src="_include/img/profile/system.png" width="55" height="55" alt="photo avatar"></a></div>
 				<div class="cmmnt-content">
 					<header><a href="javascript:void(0);" class="userlink">System</a> - <span class="pubdate">notice</span></header>
 					<p>Account doesnt exists!</a></p>
@@ -109,7 +109,7 @@ if (isDBOffline("connection") == true) {
 			} else {
 				
 				$pagetitle = $name;
-				$cookies = $_COOKIE[$idzers."_anticheat"];
+				if (isset($_COOKIE[$idzers."_anticheat"])) { $cookies = "false"; } else { $cookies = $_COOKIE[$idzers."_anticheat"]; }
 				if (strpos($ip_used, $ipaddress) == true || $cookies == "true") {
 				  if ($replace1 != "") {
 					  $thankyouecho = $replace1;
@@ -149,7 +149,7 @@ if (isDBOffline("connection") == true) {
 						</tr>".$commentfinaloutput;
 					  */
 					  $commentfinaloutput = '<li class="cmmnt">
-						<div class="avatar"><a href="javascript:void(0);"><img src="images/pikabob.png" width="55" height="55" alt="pikabob photo avatar"></a></div>
+						<div class="avatar"><a href="javascript:void(0);"><img src="images/pikabob.png" width="55" height="55" alt="photo avatar"></a></div>
 						<div class="cmmnt-content">
 							<header><a href="javascript:void(0);" class="userlink">'.$namec.'</a> - <span class="pubdate">'.$timec.'</span></header>
 							<p>'.$stringc.'</a></p>
@@ -171,7 +171,7 @@ if (isDBOffline("connection") == true) {
 			$pagetitle = "Account doesnt exists";
 			$id = "0";
 			  $commentfinaloutput = '<li class="cmmnt">
-				<div class="avatar"><a href="javascript:void(0);"><img src="images/pikabob.png" width="55" height="55" alt="pikabob photo avatar"></a></div>
+				<div class="avatar"><a href="javascript:void(0);"><img src="images/pikabob.png" width="55" height="55" alt="photo avatar"></a></div>
 				<div class="cmmnt-content">
 					<header><a href="javascript:void(0);" class="userlink">System</a> - <span class="pubdate">notice</span></header>
 					<p>Account doesnt exists!</a></p>
@@ -190,7 +190,7 @@ if (isDBOffline("connection") == true) {
 		$pagetitle = "Account doesnt exists";
 		$id = "0";
 		  $commentfinaloutput = '<li class="cmmnt">
-			<div class="avatar"><a href="javascript:void(0);"><img src="images/pikabob.png" width="55" height="55" alt="pikabob photo avatar"></a></div>
+			<div class="avatar"><a href="javascript:void(0);"><img src="images/pikabob.png" width="55" height="55" alt="photo avatar"></a></div>
 			<div class="cmmnt-content">
 				<header><a href="javascript:void(0);" class="userlink">System</a> - <span class="pubdate">notice</span></header>
 				<p>Account doesnt exists!</a></p>
@@ -216,10 +216,10 @@ if (isDBOffline("connection") == true) {
 	  $free = $getArray["free"];
 	  $clicks = intval($getArray["clicks"]);
 	  $views = intval($getArray["views"]);
-	  $getDBip = mysqli_query($connection, "SELECT * FROM ads_ip WHERE ip='$ipaddress' and adid='$nameid'");
+	  $getDBip = mysqli_query(getDbConnection(1), "SELECT * FROM ads_ip WHERE ip='$ipaddress' and adid='$nameid'");
 	  if ($free == "1") {
 		$theTopAd =  "<a href='gourl.php?id=$nameid' id='u1246-ad'><img src='//curtcreation.net/tm/local_ads/".str_replace(' ', '', $adname)."_a.png' height='90' width='468'></img></a>";
-		mysqli_query($connection, "UPDATE ads SET views='".$views."' WHERE id='".$nameid."'");
+		mysqli_query(getDbConnection(1), "UPDATE ads SET views='".$views."' WHERE id='".$nameid."'");
 	  } else {
 		  if ($balance >= 350) {
 			$theTopAd =  "<a href='gourl.php?id=$nameid' id='u1246-ad'><img src='//curtcreation.net/tm/local_ads/".str_replace(' ', '', $adname)."_a.png' height='90' width='468'></img></a>";
@@ -228,9 +228,9 @@ if (isDBOffline("connection") == true) {
 			} else {
 			  $views = intval($views) + 1;
 			  $balance = intval($balance) - 350;
-			  mysqli_query($connection, "UPDATE ads SET views='".$views."' WHERE id='".$nameid."'");
-			  mysqli_query($connection, "UPDATE ads SET balance='".$balance."' WHERE id='".$nameid."'");
-			  mysqli_query($connection, "INSERT INTO ads_ip (ip, adid, date) VALUES ('$ipaddress', '$nameid', '".time()."')");
+			  mysqli_query(getDbConnection(1), "UPDATE ads SET views='".$views."' WHERE id='".$nameid."'");
+			  mysqli_query(getDbConnection(1), "UPDATE ads SET balance='".$balance."' WHERE id='".$nameid."'");
+			  mysqli_query(getDbConnection(1), "INSERT INTO ads_ip (ip, adid, date) VALUES ('$ipaddress', '$nameid', '".time()."')");
 			}
 		  }
 	  }
@@ -247,10 +247,10 @@ if (isDBOffline("connection") == true) {
 	  $free = $getArray["free"];
 	  $clicks = intval($getArray["clicks"]);
 	  $views = intval($getArray["views"]);
-	  $getDBip = mysqli_query($connection, "SELECT * FROM ads_ip WHERE ip='$ipaddress' and adid='$nameid'");
+	  $getDBip = mysqli_query(getDbConnection(1), "SELECT * FROM ads_ip WHERE ip='$ipaddress' and adid='$nameid'");
 	  if ($free == "1") {
 		$theBottomAd =  "<img id='u1246-bad' src='//curtcreation.net/tm/local_ads/".str_replace(' ', '', $adname)."_a.png'></img>";
-		mysqli_query($connection, "UPDATE ads SET views='".$views."' WHERE id='".$nameid."'");
+		mysqli_query(getDbConnection(1), "UPDATE ads SET views='".$views."' WHERE id='".$nameid."'");
 	  } else {
 		  if ($balance >= 150) {
 			$theBottomAd =  "<a href='gourl.php?id=$nameid' id='u1246-bad'><img src='//curtcreation.net/tm/local_ads/".str_replace(' ', '', $adname)."_a.png' height='90' width='468'></img></a>";
@@ -259,9 +259,9 @@ if (isDBOffline("connection") == true) {
 			} else {
 			  $views = intval($views) + 1;
 			  $balance = intval($balance) - 150;
-			  mysqli_query($connection, "UPDATE ads SET views='".$views."' WHERE id='".$nameid."'");
-			  mysqli_query($connection, "UPDATE ads SET balance='".$balance."' WHERE id='".$nameid."'");
-			  mysqli_query($connection, "INSERT INTO ads_ip (ip, adid, date) VALUES ('$ipaddress', '$nameid', '".time()."')");
+			  mysqli_query(getDbConnection(1), "UPDATE ads SET views='".$views."' WHERE id='".$nameid."'");
+			  mysqli_query(getDbConnection(1), "UPDATE ads SET balance='".$balance."' WHERE id='".$nameid."'");
+			  mysqli_query(getDbConnection(1), "INSERT INTO ads_ip (ip, adid, date) VALUES ('$ipaddress', '$nameid', '".time()."')");
 			}
 		  }
 	  }
@@ -324,7 +324,7 @@ if (isDBOffline("connection") == true) {
 <link href="_include/css/supersized.shutter.css" rel="stylesheet">
 
 <!-- Google Font -->
-<link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Titillium+Web:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900' rel='stylesheet' type='text/css'>
 
 <!-- Fav Icon -->
 <link rel="shortcut icon" href="#">

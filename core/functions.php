@@ -5,7 +5,9 @@
 	//Database
 	function getDbConnection ($number) {
 		if ($numer = 2) {
-			return mysqli_connect(db_host, db_user, db_pass, db_database2);
+			$db = mysqli_connect(db_host, db_user, db_pass, db_database2);
+			if (!$db) { return false; }
+			return $db;
 		} else {
 			$db = mysqli_connect(db_host, db_user, db_pass, db_database);
 			if (!$db) { return false; }
@@ -36,6 +38,12 @@
 		if (!$adaptor) { return true; }
 		if ($adaptor == "connection") {
 			if (getDbConnection(1) == false) {
+				return true;
+			} else {
+				return false;
+			}
+		} elseif ($adaptor == "connection2") {
+			if (getDbConnection(2) == false) {
 				return true;
 			} else {
 				return false;
@@ -157,7 +165,7 @@
 	
 	//Statistics Record 
 	function statisticsUpdate($type) {
-		if (isDBOffline("connection") == true) { return false; }
+		if (isDBOffline("connection2") == true) { return false; }
 		if ($type == "page") {
 			$getDB1 = mysqli_query(getDbConnection(2),"SELECT * FROM settings WHERE id='1'");
 			if(mysqli_num_rows($getDB1) > 0){
@@ -184,19 +192,27 @@
 	
 	//Emoji Features
 	function emojifeature ($text) {
-		$text = str_replace(":)", "<img src='//curtcreation.net/tm/assets/emojis/Emoji%20Smiley-01.png' height='16' wieght='16'>", $text);
-		$text = str_replace(":D", "<img src='//curtcreation.net/tm/assets/emojis/Emoji%20Smiley-02.png' height='16' wieght='16'>", $text);
-		$text = str_replace("?", "<img src='//curtcreation.net/tm/assets/emojis/Emoji%20Smiley-04.png' height='16' wieght='16'>", $text);
-		$text = str_replace(";)", "<img src='//curtcreation.net/tm/assets/emojis/Emoji%20Smiley-06.png' height='16' wieght='16'>", $text);
-		$text = str_replace(":*", "<img src='//curtcreation.net/tm/assets/emojis/Emoji%20Smiley-08.png' height='16' wieght='16'>", $text);
-		$text = str_replace(":P", "<img src='//curtcreation.net/tm/assets/emojis/Emoji%20Smiley-13.png' height='16' wieght='16'>", $text);
-		$text = str_replace(":(", "<img src='//curtcreation.net/tm/assets/emojis/Emoji%20Smiley-17.png' height='16' wieght='16'>", $text);
-		$text = str_replace(":O", "<img src='//curtcreation.net/tm/assets/emojis/Emoji%20Smiley-33.png' height='16' wieght='16'>", $text);
-		$text = str_replace(":o", "<img src='//curtcreation.net/tm/assets/emojis/Emoji%20Smiley-33.png' height='16' wieght='16'>", $text);
-		$text = str_replace("8)", "<img src='//curtcreation.net/tm/assets/emojis/Emoji%20Smiley-41.png' height='16' wieght='16'>", $text);
-		$text = str_replace(":|", "<img src='//curtcreation.net/tm/assets/emojis/Emoji%20Smiley-58.png' height='16' wieght='16'>", $text);
-		$text = str_replace("<3", "<img src='//curtcreation.net/tm/assets/emojis/Emoji%20Smiley-173.png' height='16' wieght='16'>", $text);
-		$text = str_replace("</3", "<img src='//curtcreation.net/tm/assets/emojis/Emoji%20Smiley-174.png' height='16' wieght='16'>", $text);
+		$text = str_replace(":)", "<img src='/_include/img/emojis/smilely.gif' height='16' wieght='16'>", $text);
+		$text = str_replace(";)", "<img src='/_include/img/emojis/wink.gif' height='16' wieght='16'>", $text);
+		$text = str_replace(":D", "<img src='/_include/img/emojis/cheesy.gif' height='16' wieght='16'>", $text);
+		$text = str_replace(";D", "<img src='/_include/img/emojis/grin.gif' height='16' wieght='16'>", $text);
+		$text = str_replace(">:(", "<img src='/_include/img/emojis/agnry.gif' height='16' wieght='16'>", $text);
+		$text = str_replace(":(", "<img src='/_include/img/emojis/sad.gif' height='16' wieght='16'>", $text);
+		$text = str_replace(":o", "<img src='/_include/img/emojis/shocked.gif' height='16' wieght='16'>", $text);
+		$text = str_replace("8)", "<img src='/_include/img/emojis/cool.gif' height='16' wieght='16'>", $text);
+		$text = str_replace("???", "<img src='/_include/img/emojis/huh.gif' height='16' wieght='16'>", $text);
+		$text = str_replace("::)", "<img src='/_include/img/emojis/rolleyes.gif' height='16' wieght='16'>", $text);
+		$text = str_replace(":P", "<img src='/_include/img/emojis/tongue.gif' height='16' wieght='16'>", $text);
+		$text = str_replace(":P", "<img src='/_include/img/emojis/tongue.gif' height='16' wieght='16'>", $text);
+		$text = str_replace(":-[", "<img src='/_include/img/emojis/embarrased.gif' height='16' wieght='16'>", $text);
+		$text = str_replace(":-X", "<img src='/_include/img/emojis/lipsrsealed.gif' height='16' wieght='16'>", $text);
+		$text = str_replace(":-/", "<img src='/_include/img/emojis/undecided.gif' height='16' wieght='16'>", $text);
+		$text = str_replace(":-*", "<img src='/_include/img/emojis/kiss.gif' height='16' wieght='16'>", $text);
+		$text = str_replace(":'(", "<img src='/_include/img/emojis/cry.gif' height='16' wieght='16'>", $text);
+		$text = str_replace("<3", "<img src='/_include/img/emojis/love.gif' height='16' wieght='16'>", $text);
+		$text = str_replace(":fp:", "<img src='/_include/img/emojis/fp.gif' height='16' wieght='16'>", $text);
+		$text = str_replace(":thumb:", "<img src='/_include/img/emojis/thumb.png' height='16' wieght='16'>", $text);
+		
 		return $text;
 	}
 	//End of Emoji Features 
