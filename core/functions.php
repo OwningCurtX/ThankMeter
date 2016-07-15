@@ -85,6 +85,55 @@
 	}
 	//End of Get Player Cache Data 
 	
+	//Get player information from API or Cache
+	function getPlayerInfo ($nickname, $for, $autosave = false, $tmid = 0, $group = false, $squad = false) {
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_USERAGENT, 'CIT_API');
+		
+		if ($group != false && $squad != false) {
+			curl_setopt($ch, CURLOPT_URL, "http://aayushbibhuti.com/api/ab.php?search&name=$nickname&squad=$squad&group=$group");
+		} elseif ($group != true && $squad != false) {
+			curl_setopt($ch, CURLOPT_URL, "http://aayushbibhuti.com/api/ab.php?search&name=$nickname&squad=$squad");
+		} elseif ($group != false && $squad != true) {
+			curl_setopt($ch, CURLOPT_URL, "http://aayushbibhuti.com/api/ab.php?search&name=$nickname&group=$group");
+		} else {
+			curl_setopt($ch, CURLOPT_URL, "http://aayushbibhuti.com/api/ab.php?search&name=$nickname");
+		}
+		
+		$data = curl_exec($ch);
+		curl_close($ch);
+		$array = json_decode($data, true);
+		
+		if(isset($array['_ERROR']) && $array['_ERROR'] == '004:Not found!') {
+			
+			if ($autosave == true) {
+				$tmid = mysqli_real_escape_string (getDbConnection(1), $tmid);
+				$getDB = mysqli_query(getDbConnection(1),"SELECT ID,cache_player FROM users WHERE id=$tmid");
+				if (mysqli_num_rows($getDB) > 0){
+					$getArray = mysqli_fetch_array($getDB);
+					$cache = $getArray['cache_player'];
+					$array = json_decode($cache, true);
+					return $array['RESULTS'][0][$for];
+				}
+				return false;
+			}
+			
+		} elseif (isset($array['COUNT_RESULTS']) && $array['COUNT_RESULTS'] == 1) {
+			
+			if ($autosave == true) {
+				$tmid = mysqli_real_escape_string (getDbConnection(1), $tmid);
+				$data = mysqli_real_escape_string(getDbConnection(1), $data);
+				mysqli_query(getDbConnection(1),"UPDATE users SET cache_player='$data' WHERE id=$tmid");
+			}
+			return $array['RESULTS'][0][$for];
+			
+		} elseif (isset($array['COUNT_RESULTS']) && $array['COUNT_RESULTS'] > 1) {
+			return false;
+		}
+	}
+	//End of Get player information from API or Cache
+	
 	//Is Player online 
 	function isPlayerOnline ($playername) {
 		$ch = curl_init();
