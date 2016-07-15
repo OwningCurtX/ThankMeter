@@ -170,8 +170,8 @@
 	function checkMaintenance() {
 		if (isDBOffline("connection") == true) { return false; }
 		$getDB = mysqli_query(getDbConnection(1), "SELECT * FROM settings WHERE id='3'");
-		if(mysqli_num_rows($getDB2) > 0){
-			$getArray2 = mysqli_fetch_array($getDB2);
+		if(mysqli_num_rows($getDB) > 0){
+			$getArray2 = mysqli_fetch_array($getDB);
 			$hoz2 = $getArray2['value'];
 			if ($hoz2 == "true") {
 				return true;
