@@ -14,7 +14,6 @@ Current Web server: IIS 8 (On Windows Server 2012 R2)
 
 ### ToDo List
 
-* In game statistics to be implimented to the thank meter page & thank meter signature .
 * Multi-Language Feature.
 * User Control Panel needs to be updated due to new features added to the thank meter.
 * Removing request thank meter page and make a registration page via User Control Panel Page.
@@ -41,3 +40,4 @@ Current Web server: IIS 8 (On Windows Server 2012 R2)
 * Added twitter and facebook functions and database structure.
 * Added comments enable/disable functions.
 * Added Auto-Generated profile description. Based on in game information that gathered from the API.
+* Added in game statistics on thank meter signature.
