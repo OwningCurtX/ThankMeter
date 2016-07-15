@@ -40,4 +40,4 @@ Current Web server: IIS 8 (On Windows Server 2012 R2)
 * Added User Description functions and database structure. 
 * Added twitter and facebook functions and database structure.
 * Added comments enable/disable functions.
-
+* Added Auto-Generated profile description. Based on in game information that gathered from the API.
