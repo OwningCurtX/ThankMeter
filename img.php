@@ -119,7 +119,7 @@ if (isset($_GET['u'])){
 		if (isPlayerOnline ($igname) == "Online") {
 			imagettftextoutline( $imagecontainer, $size_onlineoff, 0, $x_onoffpos, $y_onoffpos, $online, $blacks, $font, isPlayerOnline ($igname), 1);
 		} else {
-			imagettftextoutline( $imagecontainer, $size_onlineoff, 0, $x_onoffpos, $y_onoffpos, $offline, $blacks, $font, duration($since_online)." ago", 1);
+			imagettftextoutline( $imagecontainer, $size_onlineoff, 0, $x_onoffpos, $y_onoffpos, $offline, $blacks, $font, duration($since_online)." Ago", 1);
 		}
 		imagettftextoutline( $imagecontainer, $image_metersize, 0, $x_meterpos, $y_meterpos, $black, $blacks, $font, $meter, 1);
 	} else {
