@@ -14,18 +14,16 @@ Current Web server: IIS 8 (On Windows Server 2012 R2)
 
 ### ToDo List
 
-* Multi-Language Feature.
-* User Control Panel needs to be updated due to new features added to the thank meter.
 * Removing request thank meter page and make a registration page via User Control Panel Page.
-* Users can edit their thank meter signature (This includes: their signature designs/X and Y meter position/X and Y online feature position/X and Y player statustics position).
-* Re-adding custom fonts.
 * Fix Bugs.
 
 
 ## Changes
 
-### 7.0 Alpha
+### 7.0 Development
 
+* User Control Panel is now updated.
+* Users can now edit their thank meter signature (This includes: their signature designs/X and Y meter position/X and Y online feature position/X and Y player statustics position).
 * Updated the current theme.
 * Added player cache into database structure.
 * Added get player information from database (PHP Function).
