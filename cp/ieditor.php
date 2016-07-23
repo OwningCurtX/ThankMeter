@@ -12,9 +12,10 @@
 	<script data-rocketsrc="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/rocketscript"></script>
 	<script data-rocketsrc="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" type="text/rocketscript"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>TM:CP - Profile</title>
+	<title>TM:CP - Image Editor</title>
 	<meta name="description" content="Curt Creation Thank Meter">
     <meta name="author" content="Curt">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 </head>
  
  
@@ -65,94 +66,83 @@
 		<div class="panel-body">
 		<?php 
 		if(isset($_POST['submit'])){
-			if (isset($_POST['replace1'])){
-				$text = mysqli_real_escape_string($db, $_POST['replace1']);
+			if (isset($_POST['rename_xmeterpos'])){
+				$text = mysqli_real_escape_string($db, $_POST['rename_xmeterpos']);
 				$rc = $row["ID"];
-				mysqli_query($db, "UPDATE users SET replace1='$text' WHERE ID='$rc'");
+				mysqli_query($db, "UPDATE users SET x_meterpos='$text' WHERE ID='$rc'");
 			} else {
 				$rc = $row["ID"];
-				mysqli_query($db, "UPDATE users SET replace1='' WHERE ID='$rc'");
+				mysqli_query($db, "UPDATE users SET x_meterpos='' WHERE ID='$rc'");
 			}
 			
-			if (isset($_POST['replace2'])){
+			
+			if (isset($_POST['rename_iymeterpos'])){
+				$text = mysqli_real_escape_string($db, $_POST['rename_iymeterpos']);
 				$rc = $row["ID"];
-				$text = mysqli_real_escape_string($db, $_POST['replace2']);
-				mysqli_query($db, "UPDATE users SET replace2='$text' WHERE ID='$rc'");
+				mysqli_query($db, "UPDATE users SET y_meterpos='$text' WHERE ID='$rc'");
 			} else {
 				$rc = $row["ID"];
-				mysqli_query($db, "UPDATE users SET replace2='' WHERE ID='$rc'");
+				mysqli_query($db, "UPDATE users SET y_meterpos='' WHERE ID='$rc'");
 			}
 			
-			if (isset($_POST['profilerole'])){
+			
+			if (isset($_POST['rename_sizemeter'])){
+				$text = mysqli_real_escape_string($db, $_POST['rename_sizemeter']);
 				$rc = $row["ID"];
-				$text = mysqli_real_escape_string($db, $_POST['profilerole']);
-				mysqli_query($db, "UPDATE users SET profilerole='$text' WHERE ID='$rc'");
+				mysqli_query($db, "UPDATE users SET image_metersize='$text' WHERE ID='$rc'");
 			} else {
 				$rc = $row["ID"];
-				mysqli_query($db, "UPDATE users SET profilerole='' WHERE ID='$rc'");
+				mysqli_query($db, "UPDATE users SET image_metersize='' WHERE ID='$rc'");
 			}
 			
-			if (isset($_POST['profilepic'])){
+			
+			if (isset($_POST['rename_xonlinepos'])){
+				$text = mysqli_real_escape_string($db, $_POST['rename_xonlinepos']);
 				$rc = $row["ID"];
-				$text = mysqli_real_escape_string($db, $_POST['profilepic']);
-				mysqli_query($db, "UPDATE users SET profilepic='$text' WHERE ID='$rc'");
+				mysqli_query($db, "UPDATE users SET x_onoffpos='$text' WHERE ID='$rc'");
 			} else {
 				$rc = $row["ID"];
-				mysqli_query($db, "UPDATE users SET profilepic='' WHERE ID='$rc'");
+				mysqli_query($db, "UPDATE users SET x_onoffpos='' WHERE ID='$rc'");
 			}
 			
-			if (isset($_POST['facebooklink'])){
+			
+			if (isset($_POST['rename_yonlinepos'])){
+				$text = mysqli_real_escape_string($db, $_POST['rename_yonlinepos']);
 				$rc = $row["ID"];
-				$text = mysqli_real_escape_string($db, $_POST['facebooklink']);
-				mysqli_query($db, "UPDATE users SET facebooklink='$text' WHERE ID='$rc'");
+				mysqli_query($db, "UPDATE users SET y_onoffpos='$text' WHERE ID='$rc'");
 			} else {
 				$rc = $row["ID"];
-				mysqli_query($db, "UPDATE users SET facebooklink='' WHERE ID='$rc'");
+				mysqli_query($db, "UPDATE users SET y_onoffpos='' WHERE ID='$rc'");
 			}
 			
-			if (isset($_POST['twitterlink'])){
+			
+			if (isset($_POST['rename_sizeonline'])){
+				$text = mysqli_real_escape_string($db, $_POST['rename_sizeonline']);
 				$rc = $row["ID"];
-				$text = mysqli_real_escape_string($db, $_POST['twitterlink']);
-				mysqli_query($db, "UPDATE users SET twitterlink='$text' WHERE ID='$rc'");
+				mysqli_query($db, "UPDATE users SET size_onlineoff='$text' WHERE ID='$rc'");
 			} else {
 				$rc = $row["ID"];
-				mysqli_query($db, "UPDATE users SET twitterlink='' WHERE ID='$rc'");
+				mysqli_query($db, "UPDATE users SET size_onlineoff='' WHERE ID='$rc'");
 			}
 			
-			if (isset($_POST['background1'])){
+			
+			if (isset($_POST['x_igfeatures'])){
+				$text = mysqli_real_escape_string($db, $_POST['x_igfeatures']);
 				$rc = $row["ID"];
-				$text = mysqli_real_escape_string($db, $_POST['background1']);
-				mysqli_query($db, "UPDATE users SET background1='$text' WHERE ID='$rc'");
+				mysqli_query($db, "UPDATE users SET x_igfeatures='$text' WHERE ID='$rc'");
 			} else {
 				$rc = $row["ID"];
-				mysqli_query($db, "UPDATE users SET background1='' WHERE ID='$rc'");
+				mysqli_query($db, "UPDATE users SET x_igfeatures='' WHERE ID='$rc'");
 			}
 			
-			if (isset($_POST['background2'])){
-				$rc = $row["ID"];
-				$text = mysqli_real_escape_string($db, $_POST['background2']);
-				mysqli_query($db, "UPDATE users SET background2='$text' WHERE ID='$rc'");
-			} else {
-				$rc = $row["ID"];
-				mysqli_query($db, "UPDATE users SET background2='' WHERE ID='$rc'");
-			}
 			
-			if (isset($_POST['background3'])){
+			if (isset($_POST['y_igfeatures'])){
+				$text = mysqli_real_escape_string($db, $_POST['y_igfeatures']);
 				$rc = $row["ID"];
-				$text = mysqli_real_escape_string($db, $_POST['background3']);
-				mysqli_query($db, "UPDATE users SET background3='$text' WHERE ID='$rc'");
+				mysqli_query($db, "UPDATE users SET y_igfeatures='$text' WHERE ID='$rc'");
 			} else {
 				$rc = $row["ID"];
-				mysqli_query($db, "UPDATE users SET background3='' WHERE ID='$rc'");
-			}
-			
-			if (isset($_POST['background4'])){
-				$rc = $row["ID"];
-				$text = mysqli_real_escape_string($db, $_POST['background4']);
-				mysqli_query($db, "UPDATE users SET background4='$text' WHERE ID='$rc'");
-			} else {
-				$rc = $row["ID"];
-				mysqli_query($db, "UPDATE users SET background4='' WHERE ID='$rc'");
+				mysqli_query($db, "UPDATE users SET y_igfeatures='' WHERE ID='$rc'");
 			}
 			
 			header( "refresh:5" );
@@ -160,43 +150,83 @@
 		}
 		?>
 			<form method="POST">
-				<b><u><font color="red">WARNING: If you replaced these text into bad words/things or abused the system then you will be banned and you will be NOT recieve any refunds.</font></u></b>
-				<br>
-				<b>"You already gave me a thanks" replace as </b><br>
-				<input type="text" name="replace1" class="form-control" aria-describedby="sizing-addon2" value="<?php echo $row['replace1']; ?>">
-				<br>
-				<b>"Thanks for thanking me" replace as </b><br>
-				<input type="text" name="replace2" class="form-control" aria-describedby="sizing-addon2" value="<?php echo $row['replace2']; ?>">
-				<br>
-				<b>Your Role</b><br>
-				<input type="text" name="profilerole" class="form-control" aria-describedby="sizing-addon2" value="<?php echo $row['profilerole']; ?>">
-				<br>
-				<b>Your Profile Picture</b><br>
-				<input type="text" name="profilepic" class="form-control" aria-describedby="sizing-addon2" value="<?php echo $row['profilepic']; ?>">
-				<br>
-				<b>Facebook Link</b><br>
-				<input type="text" name="facebooklink" class="form-control" aria-describedby="sizing-addon2" value="<?php echo $row['facebooklink']; ?>">
-				<br>
-				<b>Twitter Link</b><br>
-				<input type="text" name="twitterlink" class="form-control" aria-describedby="sizing-addon2" value="<?php echo $row['twitterlink']; ?>">
-				<br>
-				<b>Background Image URL #1</b><br>
-				<input type="text" name="profilerole" class="form-control" aria-describedby="sizing-addon2" value="<?php echo $row['background1']; ?>">
-				<br>
-				<b>Background Image URL #2</b><br>
-				<input type="text" name="profilerole" class="form-control" aria-describedby="sizing-addon2" value="<?php echo $row['background2']; ?>">
-				<br>
-				<b>Background Image URL #3</b><br>
-				<input type="text" name="profilerole" class="form-control" aria-describedby="sizing-addon2" value="<?php echo $row['background3']; ?>">
-				<br>
-				<b>Background Image URL #4</b><br>
-				<input type="text" name="profilerole" class="form-control" aria-describedby="sizing-addon2" value="<?php echo $row['background4']; ?>">
-				<br>
+				
+				<b>Preview:</b> <div id="previewimg">Please edit a field! When you edit a field, this preview image will automatically update & it doesn't means it will NOT automatically saved, you must press save to Save all changes!</div><br>
+				<b>Move the cursor in the image to show the co-ordinates. And left click to show the clicked co-ordinates.</b><br>
+				<div id="coord_move" ></div><br>
+				<div id="coord_click" ></div><br>
+				<input type="hidden" id="smallname" name="smallname" value="<?php echo $row["smallname"]; ?>"/><br>
+				<b>True Image:</b> <img src="https://curtcreation.net/tm/local_data/<?php echo $row["smallname"]; ?>/true.png"></img> <input type="file" name="trueimg"><br>
+				<b>False Image:</b> <img src="https://curtcreation.net/tm/local_data/<?php echo $row["smallname"]; ?>/false.png"></img> <input type="file" name="falseimg"><br>
+				<b>X Meter Pos: </b> <input id="rename_xmeterpos" type="text" name="rename_xmeterpos" value="<?php echo $row["x_meterpos"]; ?>" /><br>
+				<b>Y Meter Pos: </b> <input id="rename_iymeterpos" type="text" name="rename_iymeterpos" value="<?php echo $row["y_meterpos"]; ?>" /><br>
+				<b>Size Meter: </b> <input id="rename_sizemeter" type="text" name="rename_sizemeter" value="<?php echo $row["image_metersize"]; ?>" /><br>
+				<b>X Online Label Pos: </b> <input id="rename_xonlinepos" type="text" name="rename_xonlinepos" value="<?php echo $row["x_onoffpos"]; ?>" />(To disable type: -30)<br>
+				<b>Y Online Label Pos: </b> <input id="rename_yonlinepos" type="text" name="rename_yonlinepos" value="<?php echo $row["y_onoffpos"]; ?>" />(To disable type: -30)<br>
+				<b>Size Online Label: </b> <input id="rename_sizeonline" type="text" name="rename_sizeonline" value="<?php echo $row["size_onlineoff"]; ?>" />(To disable type: 1)<br>
+				<b>X Player Information: </b> <input id="x_igfeatures" type="text" name="x_igfeatures" value="<?php echo $row["x_igfeatures"]; ?>" /> (To disable type: -30)<br>
+				<b>Y Player Information: </b> <input id="y_igfeatures" type="text" name="y_igfeatures" value="<?php echo $row["y_igfeatures"]; ?>" /> (To disable type: -30)<br>
+				<b>Generated Code BBC:</b> [url=https://curtcreation.net/tm/<?php echo $row["smallname"]; ?>][img]https://curtcreation.net/tm/img/<?php echo $row["smallname"]; ?>[/img][/url]<br>
 				<br>
 				<input class="btn btn-lg btn-primary btn-block" value="Save All Changes" name="submit" type="submit" />
 			</form>
 		</div>
 	</div>
 </div>
+<script>
+    $(document).ready(function() {
+        $('#previewimg').click(function(e) {
+            var offset = $(this).offset();
+            var X = (e.pageX - offset.left);
+            var Y = (e.pageY - offset.top);
+            $('#coord_click').text('Clicked Co-Ordinates: X: ' + X + ' | Y: ' + Y);
+        });
+        $('#previewimg').on("mousemove", function(e) {
+            var offset = $(this).offset();
+            var X = (e.pageX - offset.left);
+            var Y = (e.pageY - offset.top);
+            $('#coord_move').text('Current Co-Ordinates: X: ' + X + ' | Y: ' + Y);
+        });        
+    });
+	
+	var rename_numthank = 30;
+	var rename_font = "font.tff";
+	var rename_xmeterpos = "rename_xmeterpos";
+	var rename_iymeterpos = "rename_iymeterpos";
+	var rename_sizemeter = "rename_sizemeter";
+	var rename_xonlinepos = "rename_xonlinepos";
+	var rename_yonlinepos = "rename_yonlinepos";
+	var rename_sizeonline = "rename_sizeonline";
+	var x_igfeatures = "x_igfeatures";
+	var y_igfeatures = "y_igfeatures";
+
+	$('#'+rename_font).on('change',function(e){
+		$("#previewimg").html("<img src='https://curtcreation.net/tm/previewimg.php?u=" + $("#smallname").val() + "&igname=DemoPreview&name=DemoPreview&thanksmeter=" + rename_numthank+ "&image_metersize=" + $("#rename_sizemeter").val() + "&x_meterpos=" + $("#rename_xmeterpos").val() + "&y_meterpos=" + $("#rename_iymeterpos").val() + "&x_onoff=" + $("#rename_xonlinepos").val() + "&y_onoff=" + $("#rename_yonlinepos").val() + "&size_onlineoff=" + $("#rename_sizeonline").val() + "&fss=" + $("#rename_font").val() + "&x_igfeatures="+$("#x_igfeatures").val()+"&y_igfeatures="+$("#y_igfeatures").val()+"' />");
+	});
+	$('#'+rename_xmeterpos).on('change',function(e){
+		$("#previewimg").html("<img src='https://curtcreation.net/tm/previewimg.php?u=" + $("#smallname").val() + "&igname=DemoPreview&name=DemoPreview&thanksmeter=" + rename_numthank+ "&image_metersize=" + $("#rename_sizemeter").val() + "&x_meterpos=" + $("#rename_xmeterpos").val() + "&y_meterpos=" + $("#rename_iymeterpos").val() + "&x_onoff=" + $("#rename_xonlinepos").val() + "&y_onoff=" + $("#rename_yonlinepos").val() + "&size_onlineoff=" + $("#rename_sizeonline").val() + "&fss=" + $("#rename_font").val() + "&x_igfeatures="+$("#x_igfeatures").val()+"&y_igfeatures="+$("#y_igfeatures").val()+"' />");
+	});
+	$('#'+rename_iymeterpos).on('change',function(e){
+		$("#previewimg").html("<img src='https://curtcreation.net/tm/previewimg.php?u=" + $("#smallname").val() + "&igname=DemoPreview&name=DemoPreview&thanksmeter=" + rename_numthank+ "&image_metersize=" + $("#rename_sizemeter").val() + "&x_meterpos=" + $("#rename_xmeterpos").val() + "&y_meterpos=" + $("#rename_iymeterpos").val() + "&x_onoff=" + $("#rename_xonlinepos").val() + "&y_onoff=" + $("#rename_yonlinepos").val() + "&size_onlineoff=" + $("#rename_sizeonline").val() + "&fss=" + $("#rename_font").val() + "&x_igfeatures="+$("#x_igfeatures").val()+"&y_igfeatures="+$("#y_igfeatures").val()+"' />");
+	});
+	$('#'+rename_sizemeter).on('change',function(e){
+		$("#previewimg").html("<img src='https://curtcreation.net/tm/previewimg.php?u=" + $("#smallname").val() + "&igname=DemoPreview&name=DemoPreview&thanksmeter=" + rename_numthank+ "&image_metersize=" + $("#rename_sizemeter").val() + "&x_meterpos=" + $("#rename_xmeterpos").val() + "&y_meterpos=" + $("#rename_iymeterpos").val() + "&x_onoff=" + $("#rename_xonlinepos").val() + "&y_onoff=" + $("#rename_yonlinepos").val() + "&size_onlineoff=" + $("#rename_sizeonline").val() + "&fss=" + $("#rename_font").val() + "&x_igfeatures="+$("#x_igfeatures").val()+"&y_igfeatures="+$("#y_igfeatures").val()+"' />");
+	});
+	$('#'+rename_xonlinepos).on('change',function(e){
+		$("#previewimg").html("<img src='https://curtcreation.net/tm/previewimg.php?u=" + $("#smallname").val() + "&igname=DemoPreview&name=DemoPreview&thanksmeter=" + rename_numthank+ "&image_metersize=" + $("#rename_sizemeter").val() + "&x_meterpos=" + $("#rename_xmeterpos").val() + "&y_meterpos=" + $("#rename_iymeterpos").val() + "&x_onoff=" + $("#rename_xonlinepos").val() + "&y_onoff=" + $("#rename_yonlinepos").val() + "&size_onlineoff=" + $("#rename_sizeonline").val() + "&fss=" + $("#rename_font").val() + "&x_igfeatures="+$("#x_igfeatures").val()+"&y_igfeatures="+$("#y_igfeatures").val()+"' />");
+	});
+	$('#'+rename_yonlinepos).on('change',function(e){
+		$("#previewimg").html("<img src='https://curtcreation.net/tm/previewimg.php?u=" + $("#smallname").val() + "&igname=DemoPreview&name=DemoPreview&thanksmeter=" + rename_numthank+ "&image_metersize=" + $("#rename_sizemeter").val() + "&x_meterpos=" + $("#rename_xmeterpos").val() + "&y_meterpos=" + $("#rename_iymeterpos").val() + "&x_onoff=" + $("#rename_xonlinepos").val() + "&y_onoff=" + $("#rename_yonlinepos").val() + "&size_onlineoff=" + $("#rename_sizeonline").val() + "&fss=" + $("#rename_font").val() + "&x_igfeatures="+$("#x_igfeatures").val()+"&y_igfeatures="+$("#y_igfeatures").val()+"' />");
+	});
+	$('#'+rename_sizeonline).on('change',function(e){
+		$("#previewimg").html("<img src='https://curtcreation.net/tm/previewimg.php?u=" + $("#smallname").val() + "&igname=DemoPreview&name=DemoPreview&thanksmeter=" + rename_numthank+ "&image_metersize=" + $("#rename_sizemeter").val() + "&x_meterpos=" + $("#rename_xmeterpos").val() + "&y_meterpos=" + $("#rename_iymeterpos").val() + "&x_onoff=" + $("#rename_xonlinepos").val() + "&y_onoff=" + $("#rename_yonlinepos").val() + "&size_onlineoff=" + $("#rename_sizeonline").val() + "&fss=" + $("#rename_font").val() + "&x_igfeatures="+$("#x_igfeatures").val()+"&y_igfeatures="+$("#y_igfeatures").val()+"' />");
+	});
+	$('#'+x_igfeatures).on('change',function(e){
+		$("#previewimg").html("<img src='https://curtcreation.net/tm/previewimg.php?u=" + $("#smallname").val() + "&igname=DemoPreview&name=DemoPreview&thanksmeter=" + rename_numthank+ "&image_metersize=" + $("#rename_sizemeter").val() + "&x_meterpos=" + $("#rename_xmeterpos").val() + "&y_meterpos=" + $("#rename_iymeterpos").val() + "&x_onoff=" + $("#rename_xonlinepos").val() + "&y_onoff=" + $("#rename_yonlinepos").val() + "&size_onlineoff=" + $("#rename_sizeonline").val() + "&fss=" + $("#rename_font").val() + "&x_igfeatures="+$("#x_igfeatures").val()+"&y_igfeatures="+$("#y_igfeatures").val()+"' />");
+	});
+	$('#'+y_igfeatures).on('change',function(e){
+		$("#previewimg").html("<img src='https://curtcreation.net/tm/previewimg.php?u=" + $("#smallname").val() + "&igname=DemoPreview&name=DemoPreview&thanksmeter=" + rename_numthank+ "&image_metersize=" + $("#rename_sizemeter").val() + "&x_meterpos=" + $("#rename_xmeterpos").val() + "&y_meterpos=" + $("#rename_iymeterpos").val() + "&x_onoff=" + $("#rename_xonlinepos").val() + "&y_onoff=" + $("#rename_yonlinepos").val() + "&size_onlineoff=" + $("#rename_sizeonline").val() + "&fss=" + $("#rename_font").val() + "&x_igfeatures="+$("#x_igfeatures").val()+"&y_igfeatures="+$("#y_igfeatures").val()+"' />");
+	});
+</script>
 
 </html>
