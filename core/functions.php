@@ -327,31 +327,31 @@
     $secs = $timestamp % 60;
 	
     if($years >= 6)
-        return "$years years";
+        return "$years Y";
     elseif($years >= 1)
-        return "$years years";
+        return "$years Y";
     elseif($months >= 7)
-        return "$months months";
+        return "$months M";
     elseif($months >= 1)
-        return "$months months";
+        return "$months M";
     elseif($weeks >= 3)
-        return "$weeks weeks";
+        return "$weeks W";
     elseif($weeks >= 1)
-        return "$weeks weeks";
+        return "$weeks W";
     elseif($days >= 4)
-        return "$days days";
+        return "$days D";
     elseif($days >= 1)
-        return "$days days";
+        return "$days D";
     elseif($hours >= 7)
-        return "$hours hours";
+        return "$hours H";
     elseif($hours >= 1)
-        return "$hours hours";
+        return "$hours H";
     elseif($mins >= 16)
-        return "$mins minutes";
+        return "$mins M";
     elseif($mins >= 1)
-        return "$mins minutes";
+        return "$mins S";
     else
-        return "$secs seconds";
+        return "$secs S";
 	}
 	//End of Duration 
 ?>
