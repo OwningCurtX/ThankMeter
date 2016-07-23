@@ -14,7 +14,6 @@ Current Web server: IIS 8 (On Windows Server 2012 R2)
 
 ### ToDo List
 
-* Removing request thank meter page and make a registration page via User Control Panel Page.
 * Fix Bugs.
 
 
