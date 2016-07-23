@@ -125,6 +125,7 @@
 				$tmid = mysqli_real_escape_string (getDbConnection(1), $tmid);
 				$data = mysqli_real_escape_string(getDbConnection(1), $data);
 				mysqli_query(getDbConnection(1),"UPDATE users SET cache_player='$data' WHERE id=$tmid");
+				mysqli_query(getDbConnection(1),"UPDATE users SET since_online='".time()."' WHERE id=$tmid");
 			}
 			return $array['RESULTS'][0][$for];
 			
