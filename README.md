@@ -3,18 +3,13 @@ Curt Creation Private Project - Thank Meter
 
 Owner: Curt Creation 
 
-Version: 7.0 Alpha
+Version: 7.0
 
 Developer/s: Curt
 
 Copyright Year: 2013-2016
 
 Current Web server: IIS 8 (On Windows Server 2012 R2)
-
-
-### ToDo List
-
-* Fix Bugs.
 
 
 ## Changes
