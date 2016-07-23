@@ -181,16 +181,16 @@
 				<input type="text" name="twitterlink" class="form-control" aria-describedby="sizing-addon2" value="<?php echo $row['twitterlink']; ?>">
 				<br>
 				<b>Background Image URL #1</b><br>
-				<input type="text" name="profilerole" class="form-control" aria-describedby="sizing-addon2" value="<?php echo $row['background1']; ?>">
+				<input type="text" name="background1" class="form-control" aria-describedby="sizing-addon2" value="<?php echo $row['background1']; ?>">
 				<br>
 				<b>Background Image URL #2</b><br>
-				<input type="text" name="profilerole" class="form-control" aria-describedby="sizing-addon2" value="<?php echo $row['background2']; ?>">
+				<input type="text" name="background2" class="form-control" aria-describedby="sizing-addon2" value="<?php echo $row['background2']; ?>">
 				<br>
 				<b>Background Image URL #3</b><br>
-				<input type="text" name="profilerole" class="form-control" aria-describedby="sizing-addon2" value="<?php echo $row['background3']; ?>">
+				<input type="text" name="background3" class="form-control" aria-describedby="sizing-addon2" value="<?php echo $row['background3']; ?>">
 				<br>
 				<b>Background Image URL #4</b><br>
-				<input type="text" name="profilerole" class="form-control" aria-describedby="sizing-addon2" value="<?php echo $row['background4']; ?>">
+				<input type="text" name="background4" class="form-control" aria-describedby="sizing-addon2" value="<?php echo $row['background4']; ?>">
 				<br>
 				<br>
 				<input class="btn btn-lg btn-primary btn-block" value="Save All Changes" name="submit" type="submit" />

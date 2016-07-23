@@ -127,22 +127,39 @@
 			
 			
 			if (isset($_POST['x_igfeatures'])){
-				$text = mysqli_real_escape_string($db, $_POST['x_igfeatures']);
-				$rc = $row["ID"];
+				if ($_POST['x_igfeatures'] == "-30") {
+					$rc = $row["ID"];
+					mysqli_query($db, "UPDATE users SET showstatsonsig='false' WHERE ID='$rc'");
+					mysqli_query($db, "UPDATE users SET x_igfeatures='-30' WHERE ID='$rc'");
+				} else { 
+					$text = mysqli_real_escape_string($db, $_POST['x_igfeatures']);
+					$rc = $row["ID"];
+					mysqli_query($db, "UPDATE users SET x_igfeatures='$text' WHERE ID='$rc'");
+					mysqli_query($db, "UPDATE users SET showstatsonsig='true' WHERE ID='$rc'");
+				}
 				mysqli_query($db, "UPDATE users SET x_igfeatures='$text' WHERE ID='$rc'");
 			} else {
 				$rc = $row["ID"];
 				mysqli_query($db, "UPDATE users SET x_igfeatures='' WHERE ID='$rc'");
+				mysqli_query($db, "UPDATE users SET showstatsonsig='false' WHERE ID='$rc'");
 			}
 			
 			
 			if (isset($_POST['y_igfeatures'])){
-				$text = mysqli_real_escape_string($db, $_POST['y_igfeatures']);
-				$rc = $row["ID"];
-				mysqli_query($db, "UPDATE users SET y_igfeatures='$text' WHERE ID='$rc'");
+				if ($_POST['y_igfeatures'] == "-30") {
+					$rc = $row["ID"];
+					mysqli_query($db, "UPDATE users SET showstatsonsig='false' WHERE ID='$rc'");
+					mysqli_query($db, "UPDATE users SET y_igfeatures='-30' WHERE ID='$rc'");
+				} else { 
+					$text = mysqli_real_escape_string($db, $_POST['y_igfeatures']);
+					$rc = $row["ID"];
+					mysqli_query($db, "UPDATE users SET y_igfeatures='$text' WHERE ID='$rc'");
+					mysqli_query($db, "UPDATE users SET showstatsonsig='true' WHERE ID='$rc'");
+				}
 			} else {
 				$rc = $row["ID"];
 				mysqli_query($db, "UPDATE users SET y_igfeatures='' WHERE ID='$rc'");
+				mysqli_query($db, "UPDATE users SET showstatsonsig='false' WHERE ID='$rc'");
 			}
 			
 			header( "refresh:5" );

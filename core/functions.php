@@ -303,4 +303,55 @@
 		return $output;
 	}
 	//End of Data Encryption 
+	
+	//Duration
+	function duration($start){
+	$end = time();
+    $timestamp = $end - $start;
+    $years = floor($timestamp / (60 * 60 * 24 * 360));
+    $timestamp %= (60 * 60 * 24 * 360);
+
+    $months = floor($timestamp / (60 * 60 * 24 * 30));
+    $timestamp %= (60 * 60 * 24 * 30);
+
+    $weeks = floor($timestamp / (60 * 60 * 24 * 7));
+    $timestamp %= (60 * 60 * 24 * 7);
+
+    $days = floor($timestamp / (60 * 60 * 24));
+    $timestamp %= (60 * 60 * 24);
+
+    $hours = floor($timestamp / (60 * 60));
+    $timestamp %= (60 * 60);
+
+    $mins = floor($timestamp / 60);
+    $secs = $timestamp % 60;
+	
+    if($years >= 6)
+        return "$years years";
+    elseif($years >= 1)
+        return "$years years";
+    elseif($months >= 7)
+        return "$months months";
+    elseif($months >= 1)
+        return "$months months";
+    elseif($weeks >= 3)
+        return "$weeks weeks";
+    elseif($weeks >= 1)
+        return "$weeks weeks";
+    elseif($days >= 4)
+        return "$days days";
+    elseif($days >= 1)
+        return "$days days";
+    elseif($hours >= 7)
+        return "$hours hours";
+    elseif($hours >= 1)
+        return "$hours hours";
+    elseif($mins >= 16)
+        return "$mins minutes";
+    elseif($mins >= 1)
+        return "$mins minutes";
+    else
+        return "$secs seconds";
+	}
+	//End of Duration 
 ?>
