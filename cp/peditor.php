@@ -12,7 +12,7 @@
 	<script data-rocketsrc="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/rocketscript"></script>
 	<script data-rocketsrc="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" type="text/rocketscript"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>TM:CP - Profile</title>
+	<title>TM:CP - Page Editor</title>
 	<meta name="description" content="Curt Creation Thank Meter">
     <meta name="author" content="Curt">
 </head>
